@@ -1,0 +1,29 @@
+import csv
+
+def replace_sentence_in_file(filename, old_sentence, new_sentence):
+
+    with open(filename, 'r') as file:
+        content = file.read()
+
+    # Replace the old sentence with the new one
+    content = content.replace(old_sentence, new_sentence)
+
+    # Write the updated content back to the file
+    with open(filename, 'w') as file:
+        file.write(content)
+
+def apply_replacements_from_csv(filename, csv_file):
+
+
+    with open(csv_file, 'r') as file:
+        reader = csv.reader(file)
+
+        for row in reader:
+            old_sentence, new_sentence = row
+            replace_sentence_in_file(filename, old_sentence, new_sentence)
+
+
+# Example usage:
+text_filename = "sample.txt"
+csv_filename = "replacements.csv"
+apply_replacements_from_csv(text_filename, csv_filename)
